@@ -5,7 +5,7 @@ require 'rspec/rails'
 describe ApplicationController, :type => :controller do
   before(:each) do
     @controller = ApplicationController.new
-    @shortened_url = ShortenedUrl.new#(url: "www.google.com", shortened_url: "abcde12")
+    @shortened_url = ShortenedUrl.new
   end
   
   it "should get index" do
