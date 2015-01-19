@@ -5,10 +5,7 @@ require 'rspec/rails'
 describe ApplicationController, :type => :controller do
   before(:each) do
     @controller = ApplicationController.new
-    @shortened_url = ShortenedUrl.new("www.google.com")
-    @shortened_url.stub(:url).and_return("www.google.com")
-    @shortened_url.stub(:shortened_url).and_return("abcdef12")
-    ShortenedUrl.stub(:create).and_return(@shortened_url)
+    @shortened_url = ShortenedUrl.new#(url: "www.google.com", shortened_url: "abcde12")
   end
   
   it "should get index" do
@@ -17,7 +14,15 @@ describe ApplicationController, :type => :controller do
   end
 
   it "should return a shortened url" do
-    get :shrink_url, url: "www.google.com"
+    @shortened_url.stub(:url).and_return("http://www.google.com")
+    @shortened_url.stub(:shortened_url).and_return("abcdef12")
+    ShortenedUrl.stub(:create).and_return(@shortened_url)
+    get :shrink_url, url: "http://www.google.com"
     response.body.should == "{\"shortened_url\":\"abcdef12\"}"
+  end
+
+  it "should throw an error when given an invalid url" do
+    get :shrink_url, url: "this be fake"
+    response.body.should match(/submitted was not valid/)
   end
 end
