@@ -18,11 +18,11 @@ describe ApplicationController, :type => :controller do
     @shortened_url.stub(:shortened_url).and_return("abcdef12")
     ShortenedUrl.stub(:create).and_return(@shortened_url)
     get :shrink_url, url: "http://www.google.com"
-    response.body.should == "{\"shortened_url\":\"abcdef12\"}"
+    expect(response.body).to eq "{\"shortened_url\":\"abcdef12\"}"
   end
 
   it "should throw an error when given an invalid url" do
     get :shrink_url, url: "this be fake"
-    response.body.should match(/submitted was not valid/)
+    expect(response.body).to match(/submitted was not valid/)
   end
 end
