@@ -24,12 +24,5 @@ test:
   database: url_shortener_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  timeout: 5000
-  host:  url-shortener-app.cyzcjmsszild.us-west-2.rds.amazonaws.com
-  port:  5432
-  database: url_shortener
-  username: postgres
-  password: defaultpassword
+  <<: *default
+  database: url_shortener_prod
