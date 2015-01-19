@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get '/' => 'application#index'
-  get '/shrink_url/:url' => 'application#shrink_url'
+  put '/shrink_url' => 'application#shrink_url'
   get '/:shortened_url' => 'application#redirect_to_url'
 
   # The priority is based upon order of creation: first created -> highest priority.
