@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get '/index' => 'application#index'
+  get '/' => 'application#index'
+  get '/shrink_url/:url' => 'application#shrink_url'
+  get '/:shortened_url' => 'application#redirect_to_url'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

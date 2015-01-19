@@ -6,4 +6,19 @@ class ApplicationController < ActionController::Base
   def index
     render "/index"
   end
+
+  def shrink_url
+    url_from_user = params[:url]
+    shortened_url = ShortenedUrl.create(url_from_user)
+    render json: {shortened_url: shortened_url.shortened_url}
+  end
+
+  def redirect_to_url
+    shortened_url = ShortenedUrl.where(url: params[:shortened_url]).first
+    unless(shortened_url.nil?)
+      redirect_to shortened_url.url
+    else
+      render "/error"
+    end
+  end
 end

@@ -39,6 +39,11 @@ group :development, :test do
 
   # use guard for test runs
   gem 'guard-rspec'
+
+  # advanced mocks
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
